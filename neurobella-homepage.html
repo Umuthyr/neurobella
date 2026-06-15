@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neurobella — Our Mission</title>
+<style>
+  :root{
+    --bg:#0d1411; --bg-2:#101b16; --card:#14211b; --card-2:#18271f;
+    --line:#23362c; --ink:#eef5ef; --muted:#9bb3a4; --muted-2:#7d978a;
+    --green:#1fd07a; --green-deep:#0fa860; --lime:#b8f04a; --gold:#f5c451;
+    --orange:#ff8a4c; --blue:#5cc8ff; --violet:#b58cff; --radius:18px; --maxw:1080px;
+    font-synthesis:none;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:
+      radial-gradient(1300px 700px at 75% -15%, rgba(31,208,122,.16), transparent 60%),
+      radial-gradient(1000px 600px at -10% 5%, rgba(184,240,74,.08), transparent 55%),
+      radial-gradient(900px 500px at 50% 110%, rgba(92,200,255,.07), transparent 60%),
+      var(--bg);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rgba(13,20,17,.8);border-bottom:1px solid var(--line)}
+  .nav-inner{max-width:var(--maxw);margin:0 auto;padding:13px 22px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:850;letter-spacing:.5px;font-size:17px}
+  .logo{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,var(--green),var(--lime));display:grid;place-items:center;color:#06160f;font-weight:900;font-size:17px}
+  .nav-links{display:flex;gap:3px;margin-left:auto;flex-wrap:wrap}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:13px;font-weight:600;padding:7px 12px;border-radius:9px;transition:.2s}
+  .nav-links a:hover{color:var(--ink);background:var(--card-2)}
+
+  header{padding:90px 0 60px;text-align:center;position:relative}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--green);background:rgba(31,208,122,.10);border:1px solid rgba(31,208,122,.25);padding:8px 16px;border-radius:100px}
+  h1{font-size:clamp(38px,7vw,72px);line-height:1.02;letter-spacing:-2px;margin:26px auto 20px;font-weight:880;max-width:920px}
+  h1 .hl{background:linear-gradient(120deg,var(--green),var(--lime));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero-sub{font-size:clamp(17px,2.6vw,22px);color:var(--muted);max-width:700px;margin:0 auto}
+  .hero-cta{margin-top:36px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:750;font-size:15px;text-decoration:none;padding:14px 26px;border-radius:100px;transition:.2s}
+  .btn-primary{background:linear-gradient(120deg,var(--green),var(--lime));color:#06160f;box-shadow:0 10px 30px rgba(31,208,122,.28)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(31,208,122,.4)}
+  .btn-ghost{border:1px solid var(--line);color:var(--ink);background:var(--card)}
+  .btn-ghost:hover{border-color:var(--green);color:var(--green)}
+
+  section{padding:60px 0;border-top:1px solid var(--line)}
+  .sec-tag{font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--green)}
+  h2{font-size:clamp(26px,4.4vw,40px);letter-spacing:-1px;margin:10px 0 12px;font-weight:840}
+  .lead{color:var(--muted);max-width:760px;font-size:17px}
+  .center{text-align:center}.center .lead{margin:0 auto}
+
+  .grid{display:grid;gap:16px;margin-top:30px}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:820px){.g2,.g3{grid-template-columns:1fr}}
+  .card{background:linear-gradient(160deg,var(--card),var(--bg-2));border:1px solid var(--line);border-radius:var(--radius);padding:26px;transition:.25s}
+  .card:hover{border-color:rgba(31,208,122,.4);transform:translateY(-3px)}
+  .card .ic{font-size:26px}
+  .card h3{font-size:18px;margin:12px 0 7px;font-weight:780}
+  .card p{color:var(--muted);font-size:14.5px}
+
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
+  @media(max-width:820px){.stats{grid-template-columns:1fr}}
+  .stat{background:linear-gradient(160deg,var(--card),var(--bg-2));border:1px solid var(--line);border-radius:20px;padding:34px 26px;text-align:center;position:relative;overflow:hidden}
+  .stat::before{content:"";position:absolute;inset:0;background:radial-gradient(400px 200px at 50% -40%,var(--glow),transparent 70%);opacity:.5}
+  .stat .num{font-size:clamp(42px,7vw,62px);font-weight:900;letter-spacing:-2px;line-height:1;background:linear-gradient(120deg,var(--green),var(--lime));-webkit-background-clip:text;background-clip:text;color:transparent;position:relative}
+  .stat .when{font-size:13px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink);margin-top:14px;position:relative}
+  .stat .desc{font-size:13.5px;color:var(--muted);margin-top:6px;position:relative}
+
+  /* MOMENTUM */
+  .momentum{margin-top:34px;background:linear-gradient(135deg,rgba(92,200,255,.12),rgba(31,208,122,.06));border:1px solid rgba(92,200,255,.28);border-radius:20px;padding:30px 30px}
+  .momentum .mhead{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px}
+  .momentum h3{font-size:19px;font-weight:800}
+  .momentum .mgoal{font-size:14px;color:var(--muted);font-weight:600}
+  .ptrack{height:18px;border-radius:100px;background:var(--card-2);border:1px solid var(--line);overflow:hidden;margin:16px 0 10px}
+  .pfill{height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--green),var(--lime));border-radius:100px;transition:width 1.3s cubic-bezier(.2,.7,.2,1)}
+  .pmeta{display:flex;justify-content:space-between;font-size:13.5px;color:var(--muted);font-weight:600}
+  .pmeta b{color:var(--ink)}
+
+  .road{margin-top:30px;display:grid;gap:14px}
+  .milestone{display:grid;grid-template-columns:130px 1fr;gap:22px;align-items:center;background:linear-gradient(160deg,var(--card),var(--bg-2));border:1px solid var(--line);border-left:4px solid var(--mc);border-radius:16px;padding:22px 24px;transition:.2s}
+  .milestone:hover{transform:translateX(5px)}
+  .milestone .big{font-size:34px;font-weight:900;letter-spacing:-1.5px;color:var(--mc)}
+  .milestone h3{font-size:18px;font-weight:780;margin-bottom:4px}
+  .milestone p{color:var(--muted);font-size:14.5px}
+  @media(max-width:620px){.milestone{grid-template-columns:1fr;gap:6px}}
+
+  /* ENGINE / FLYWHEEL */
+  .engine{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px;align-items:stretch}
+  .enode{flex:1;min-width:130px;background:linear-gradient(160deg,var(--card),var(--bg-2));border:1px solid var(--line);border-radius:15px;padding:18px 14px;text-align:center;position:relative}
+  .enode .ei{font-size:24px}
+  .enode h4{font-size:14px;margin:8px 0 3px;font-weight:760}
+  .enode p{font-size:12px;color:var(--muted)}
+  .enode::after{content:"→";position:absolute;right:-9px;top:50%;transform:translateY(-50%);color:var(--green);font-weight:900;font-size:16px;z-index:2}
+  .enode:last-child::after{content:"↺";color:var(--lime)}
+  @media(max-width:820px){.enode::after{content:"↓";right:50%;top:auto;bottom:-15px;transform:translateX(50%)}.enode:last-child::after{content:"↺"}}
+
+  .value{display:flex;gap:16px;align-items:flex-start;background:linear-gradient(160deg,var(--card),var(--bg-2));border:1px solid var(--line);border-radius:16px;padding:22px 24px;transition:.2s}
+  .value:hover{border-color:rgba(31,208,122,.4)}
+  .value .vic{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;font-size:22px;background:var(--card-2);border:1px solid var(--line);flex:none}
+  .value h3{font-size:17px;font-weight:780;margin-bottom:5px}
+  .value p{color:var(--muted);font-size:14.5px}
+
+  .principles{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:26px}
+  @media(max-width:820px){.principles{grid-template-columns:1fr}}
+  .principle{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:flex;gap:12px;align-items:baseline}
+  .principle .pn{font-weight:900;color:var(--green);font-size:15px;flex:none}
+  .principle b{font-weight:750}.principle span{color:var(--muted);font-size:13.5px}
+
+  .teamband{background:linear-gradient(135deg,rgba(31,208,122,.14),rgba(184,240,74,.06));border:1px solid rgba(31,208,122,.3);border-radius:22px;padding:40px 34px;text-align:center;margin-top:30px}
+  .teamband .tnum{font-size:clamp(44px,8vw,68px);font-weight:900;letter-spacing:-2px;background:linear-gradient(120deg,var(--green),var(--lime));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1}
+  .teamband p{color:var(--muted);font-size:16px;margin-top:10px;max-width:620px;margin-left:auto;margin-right:auto}
+
+  .note{background:linear-gradient(160deg,var(--card),var(--bg-2));border:1px solid var(--line);border-radius:22px;padding:38px 36px;margin-top:30px;position:relative}
+  .note .quote{font-size:clamp(19px,2.8vw,26px);line-height:1.5;font-weight:600;letter-spacing:-.4px}
+  .note .quote span{background:linear-gradient(120deg,var(--green),var(--lime));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .note .sign{display:flex;align-items:center;gap:14px;margin-top:24px}
+  .note .ava{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--lime));display:grid;place-items:center;color:#06160f;font-weight:900;font-size:20px}
+  .note .who{font-weight:780}.note .role{color:var(--muted);font-size:13.5px}
+
+  footer{padding:54px 0 72px;text-align:center;color:var(--muted-2);font-size:13px;border-top:1px solid var(--line)}
+  footer .logo{margin:0 auto 14px}
+
+  .reveal{opacity:0;transform:translateY(26px);transition:.7s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="brand"><span class="logo">N</span> NEUROBELLA</div>
+    <div class="nav-links">
+      <a href="#mission">Mission</a>
+      <a href="#vision">Vision</a>
+      <a href="#engine">The Engine</a>
+      <a href="#future">Your Future</a>
+      <a href="#culture">Culture</a>
+      <a href="#team">Team</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap reveal">
+    <span class="eyebrow">● The Mission</span>
+    <h1>We give people their <span class="hl">sight</span> — and their future — back.</h1>
+    <p class="hero-sub">Neurobella is a team of A-players turning real science and proven psychology into creative that reaches millions of people terrified of going blind — and hands them something they can actually do about it.</p>
+    <div class="hero-cta">
+      <a href="#vision" class="btn btn-primary">See the vision →</a>
+      <a href="#culture" class="btn btn-ghost">How we work</a>
+    </div>
+  </div>
+</header>
+
+<!-- MISSION -->
+<section id="mission">
+  <div class="wrap reveal">
+    <span class="sec-tag">01 — Why We Exist</span>
+    <h2>Most people are told nothing can be done. We disagree.</h2>
+    <p class="lead">Every day, people are handed a frightening diagnosis, offered only needles and a bill, and sent home feeling powerless. Our job is to reach them with a real, root-cause option — and the agency to act. Behind every winning ad we ship is a person who thought they were out of options, finding out they're not.</p>
+    <div class="grid g3">
+      <div class="card"><div class="ic">🔬</div><h3>Real science, honest copy</h3><p>Clinical-dose formulas and direct-response psychology that respects the customer and tells the truth about what they're feeling.</p></div>
+      <div class="card"><div class="ic">🫶</div><h3>Genuine agency</h3><p>We give people something they can do themselves — alongside their care, never instead of it. Hope that's grounded in action.</p></div>
+      <div class="card"><div class="ic">📣</div><h3>Reach at scale</h3><p>The better our creative, the more people we reach. Growth isn't just revenue here — it's reach. More winners = more lives touched.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- VISION -->
+<section id="vision">
+  <div class="wrap center reveal">
+    <span class="sec-tag">02 — The Vision</span>
+    <h2>Where we're going</h2>
+    <p class="lead">Ambitious, clear, and within reach — together. With your help, we hit these. Easy.</p>
+  </div>
+  <div class="wrap reveal">
+    <div class="stats">
+      <div class="stat" style="--glow:rgba(92,200,255,.4)">
+        <div class="num" data-target="10" data-prefix="$" data-suffix="M">$0M</div>
+        <div class="when">December</div>
+        <div class="desc">A $10M month — the next milestone, right in front of us.</div>
+      </div>
+      <div class="stat" style="--glow:rgba(31,208,122,.45)">
+        <div class="num" data-target="35" data-prefix="$" data-suffix="M">$0M</div>
+        <div class="when">This Year · EOY</div>
+        <div class="desc">$35 million on the board by end of year.</div>
+      </div>
+      <div class="stat" style="--glow:rgba(184,240,74,.4)">
+        <div class="num" data-target="100" data-prefix="$" data-suffix="M">$0M</div>
+        <div class="when">Next Year</div>
+        <div class="desc">$100 million — the year we go from strong to category-defining.</div>
+      </div>
+    </div>
+
+    <!-- MOMENTUM TRACKER -->
+    <div class="momentum">
+      <div class="mhead">
+        <h3>🔥 This month's mission</h3>
+        <div class="mgoal">Target: <b style="color:var(--ink)">$2.5M</b> this month</div>
+      </div>
+      <div class="ptrack"><div class="pfill" id="pfill"></div></div>
+      <div class="pmeta">
+        <span id="pnow">$0.0M so far</span>
+        <span id="ppct">0% to goal</span>
+      </div>
+      <p style="color:var(--muted);font-size:13.5px;margin-top:12px">Every winning brief moves this bar. We watch it climb together — this is the number that proves the whole vision is real.</p>
+    </div>
+
+    <div class="road">
+      <div class="milestone" style="--mc:#5cc8ff">
+        <div class="big">$10M</div>
+        <div><h3>December — the breakout month</h3><p>We stack the wins from this quarter into our biggest month yet. This is the proof point everything else is built on.</p></div>
+      </div>
+      <div class="milestone" style="--mc:#1fd07a">
+        <div class="big">$35M</div>
+        <div><h3>End of this year</h3><p>A full year of testing, learning and scaling winners across our angles and avatars — closing the year at $35M.</p></div>
+      </div>
+      <div class="milestone" style="--mc:#b8f04a">
+        <div class="big">$100M</div>
+        <div><h3>Next year — the big one</h3><p>Once we've nailed the system and we're all in flowstate, we widen the playbook and launch more SKUs to reach $100M.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE ENGINE -->
+<section id="engine">
+  <div class="wrap reveal">
+    <span class="sec-tag">03 — The Growth Engine</span>
+    <h2>How it all connects</h2>
+    <p class="lead">One simple machine drives everything. Your work lives somewhere on this loop — and every turn of it gets us closer to $100M and more people reached.</p>
+
+    <div class="engine">
+      <div class="enode"><div class="ei">🔎</div><h4>Research</h4><p>Avatars &amp; angles</p></div>
+      <div class="enode"><div class="ei">✍️</div><h4>Brief</h4><p>High-converting creative</p></div>
+      <div class="enode"><div class="ei">🚀</div><h4>Test</h4><p>Ship &amp; spend</p></div>
+      <div class="enode"><div class="ei">📊</div><h4>Learn</h4><p>Read the data</p></div>
+      <div class="enode"><div class="ei">📈</div><h4>Scale</h4><p>Double down on winners</p></div>
+      <div class="enode"><div class="ei">📦</div><h4>Expand</h4><p>New angles &amp; SKUs</p></div>
+    </div>
+
+    <div class="grid g2" style="margin-top:24px">
+      <div class="card"><div class="ic">🧪</div><h3>Test more angles &amp; avatars</h3><p>The growth engine is a constant stream of new angles and avatars, briefed by A-players who build on what's already winning instead of guessing.</p></div>
+      <div class="card"><div class="ic">⚡</div><h3>Get into flowstate</h3><p>When the system clicks and the team is in flow, output and quality compound. That's the state we're building toward, together.</p></div>
+      <div class="card"><div class="ic">📦</div><h3>Launch more SKUs</h3><p>Once we've nailed this, we expand the product line — new SKUs that open new audiences and carry us toward $100M.</p></div>
+      <div class="card"><div class="ic">🏆</div><h3>A-players only</h3><p>We win because of the people in the room. High standards, high trust, high ownership — everyone pulling in the same direction.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S IN IT FOR YOU -->
+<section id="future">
+  <div class="wrap reveal">
+    <span class="sec-tag">04 — What's In It For You</span>
+    <h2>This isn't a job. It's your launchpad.</h2>
+    <p class="lead">We grow, you grow. When Neurobella wins, the people who built it win — in money, in skill, and in the future you're building for yourself.</p>
+    <div class="grid" style="margin-top:30px">
+      <div class="value"><div class="vic">💰</div><div><h3>A fair bonus, always</h3><p>We work with a bonus system to keep things fair. When the company hits, you share the upside — your results translate directly into reward.</p></div></div>
+      <div class="value"><div class="vic">🔑</div><div><h3>Real ownership</h3><p>You own outcomes, not just tasks. The freedom to make calls, run with ideas, and see your fingerprints on the wins.</p></div></div>
+      <div class="value"><div class="vic">🚀</div><div><h3>Level up beside A-players</h3><p>You're surrounded by people at the top of their game. The fastest way to grow is to build shoulder-to-shoulder with the best — that's the room you're in.</p></div></div>
+      <div class="value"><div class="vic">🌍</div><div><h3>Work that actually matters</h3><p>Your briefs reach real people who are terrified of losing their sight — and hand them hope. Few jobs let you feel your impact this directly.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CULTURE -->
+<section id="culture">
+  <div class="wrap reveal">
+    <span class="sec-tag">05 — Our Culture</span>
+    <h2>How we work together</h2>
+    <p class="lead">No politics, no ego, no boss-and-employee theatre. Just A-players building something real — and building their own future while they do it.</p>
+    <div class="grid" style="margin-top:30px">
+      <div class="value"><div class="vic">🤝</div><div><h3>Partners, not boss &amp; employee</h3><p>There's no employee-or-boss relationship here. We work <strong>together</strong>. Everyone is working for their own future, and we rise as a team.</p></div></div>
+      <div class="value"><div class="vic">💬</div><div><h3>Communication is key</h3><p>Clear, honest, frequent communication is the foundation of everything. When in doubt, over-communicate. It keeps us fast and aligned.</p></div></div>
+      <div class="value"><div class="vic">🌱</div><div><h3>A culture worth protecting</h3><p>Good culture isn't a perk — it's the multiplier. We protect it actively: respect, ownership, and a genuine care for each other's growth.</p></div></div>
+      <div class="value"><div class="vic">📨</div><div><h3>Umut's door is always open</h3><p>Stuck on something? Got a question or an idea? <strong>Always reach out to Umut</strong> — directly, anytime. No question is too small.</p></div></div>
+    </div>
+
+    <h3 style="margin-top:34px;font-size:18px;font-weight:800;color:var(--gold)">⭐ How we show up — our operating principles</h3>
+    <div class="principles">
+      <div class="principle"><span class="pn">01</span><span><b>Extreme ownership.</b> See it, own it, fix it. No “not my job.”</span></div>
+      <div class="principle"><span class="pn">02</span><span><b>Speed beats perfection.</b> Ship, test, learn — momentum is the edge.</span></div>
+      <div class="principle"><span class="pn">03</span><span><b>Build on winners.</b> Don't reinvent the wheel — scale what works.</span></div>
+      <div class="principle"><span class="pn">04</span><span><b>Candor with kindness.</b> Say the real thing, early, and with respect.</span></div>
+      <div class="principle"><span class="pn">05</span><span><b>Data over opinions.</b> The numbers settle the debate — read them, act on them.</span></div>
+      <div class="principle"><span class="pn">06</span><span><b>Protect the team.</b> We win together; nobody gets left in the dark.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="wrap reveal">
+    <span class="sec-tag">06 — The Team</span>
+    <h2>We do this all together</h2>
+    <div class="teamband">
+      <div class="tnum">25+ → 35+</div>
+      <p>We're <strong>25+ people</strong> today, including our customer service team — and growing to <strong>30–35+</strong> as our output scales. Every new seat is another A-player joining the mission.</p>
+    </div>
+
+    <div class="note">
+      <div class="quote">“We're not here to clock in. We're here to <span>build our future</span> — together. Nail this, get into flowstate, and $100M isn't a dream, it's a deadline. I'm in this with you. Reach out anytime.”</div>
+      <div class="sign">
+        <div class="ava">U</div>
+        <div>
+          <div class="who">Umut</div>
+          <div class="role">Founder, Neurobella</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="logo">N</div>
+    <p><strong>Neurobella</strong> — Protecting people's sight. Building our future.</p>
+    <p style="margin-top:6px">$10M December · $35M this year · $100M next year. Together. 🚀</p>
+  </div>
+</footer>
+
+<script>
+  /* ====== EDIT THIS ONE NUMBER as the month builds ====== */
+  const monthSoFar = 1.0;   // current month revenue, in $M (e.g. 4.2)
+  const monthGoal  = 2.5;   // this month's target
+  /* ====================================================== */
+
+  function animate(el){
+    const target=parseFloat(el.dataset.target);
+    const prefix=el.dataset.prefix||""; const suffix=el.dataset.suffix||"";
+    const dur=1400; const start=performance.now();
+    function tick(now){
+      const p=Math.min((now-start)/dur,1);
+      const eased=1-Math.pow(1-p,3);
+      el.textContent=prefix+Math.round(target*eased)+suffix;
+      if(p<1) requestAnimationFrame(tick); else el.textContent=prefix+target+suffix;
+    }
+    requestAnimationFrame(tick);
+  }
+
+  function fillMomentum(){
+    const pct=Math.max(0,Math.min(100,Math.round((monthSoFar/monthGoal)*100)));
+    document.getElementById('pfill').style.width=pct+'%';
+    document.getElementById('pnow').textContent='$'+monthSoFar.toFixed(1)+'M so far';
+    document.getElementById('ppct').textContent=pct+'% to goal';
+  }
+
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('in');
+      e.target.querySelectorAll('[data-target]').forEach(animate);
+      if(e.target.querySelector('#pfill')) fillMomentum();
+      io.unobserve(e.target);
+    }
+  });},{threshold:0,rootMargin:"0px 0px -60px 0px"});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
