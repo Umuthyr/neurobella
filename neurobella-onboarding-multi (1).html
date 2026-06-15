@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neurobella — Creative Strategist Onboarding (AMD + DR)</title>
+<style>
+  :root{
+    --bg:#0d1411; --bg-2:#101b16; --card:#14211b; --card-2:#18271f;
+    --line:#23362c; --ink:#eef5ef; --muted:#9bb3a4; --muted-2:#7d978a;
+    --green:#1fd07a; --green-deep:#0fa860; --lime:#b8f04a; --gold:#f5c451;
+    --orange:#ff8a4c; --red:#ff6b6b; --blue:#5cc8ff; --radius:18px; --maxw:1080px;
+    font-synthesis:none;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(31,208,122,.10), transparent 60%),
+      radial-gradient(900px 500px at -10% 10%, rgba(184,240,74,.06), transparent 55%),
+      var(--bg);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rgba(13,20,17,.82);border-bottom:1px solid var(--line)}
+  .nav-inner{max-width:var(--maxw);margin:0 auto;padding:12px 22px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.5px;font-size:16px}
+  .logo{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--green),var(--lime));display:grid;place-items:center;color:#06160f;font-weight:900;font-size:16px}
+  .nav-links{display:flex;gap:2px;margin-left:auto;flex-wrap:wrap}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:12.5px;font-weight:600;padding:7px 10px;border-radius:9px;transition:.2s}
+  .nav-links a:hover{color:var(--ink);background:var(--card-2)}
+  header{padding:74px 0 40px;position:relative}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--green);background:rgba(31,208,122,.10);border:1px solid rgba(31,208,122,.25);padding:7px 14px;border-radius:100px}
+  h1{font-size:clamp(34px,6vw,60px);line-height:1.04;letter-spacing:-1.5px;margin:22px 0 16px;font-weight:850}
+  h1 .hl{background:linear-gradient(120deg,var(--green),var(--lime));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{font-size:clamp(16px,2.4vw,20px);color:var(--muted);max-width:680px}
+  .hero-kpi{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
+  .kpi{background:linear-gradient(160deg,var(--card),var(--bg-2));border:1px solid var(--line);border-radius:16px;padding:18px 22px;min-width:140px}
+  .kpi .n{font-size:30px;font-weight:850;background:linear-gradient(120deg,var(--green),var(--lime));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .kpi .l{font-size:12.5px;color:var(--muted);margin-top:3px;font-weight:600;letter-spacing:.3px}
+  section{padding:46px 0;border-top:1px solid var(--line)}
+  .sec-tag{font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--green)}
+  h2{font-size:clamp(24px,4vw,34px);letter-spacing:-.8px;margin:10px 0 8px;font-weight:820}
+  .lead{color:var(--muted);max-width:740px;font-size:16px}
+  .grid{display:grid;gap:16px;margin-top:26px}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:820px){.g2,.g3,.g4{grid-template-columns:1fr}}
+  .card{background:linear-gradient(160deg,var(--card),var(--bg-2));border:1px solid var(--line);border-radius:var(--radius);padding:22px;transition:.25s;position:relative}
+  .card:hover{border-color:rgba(31,208,122,.4);transform:translateY(-3px)}
+  .card h3{font-size:17px;margin-bottom:7px;font-weight:750;display:flex;align-items:center;gap:9px}
+  .card p{color:var(--muted);font-size:14.5px}
+  .chip{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;font-size:18px;background:var(--card-2);border:1px solid var(--line);flex:none}
+  .banner{background:linear-gradient(135deg,rgba(31,208,122,.14),rgba(184,240,74,.06));border:1px solid rgba(31,208,122,.3);border-radius:20px;padding:30px 28px;display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap}
+  .banner.amber{background:linear-gradient(135deg,rgba(245,196,81,.14),rgba(255,138,76,.06));border-color:rgba(245,196,81,.32)}
+  .banner .big{font-size:46px;line-height:1}
+  .banner h3{font-size:20px;margin-bottom:6px}
+  .banner p{color:var(--muted);font-size:15px;max-width:780px}
+  .levels{display:grid;gap:12px;margin-top:24px}
+  .level{display:grid;grid-template-columns:64px 1fr;gap:18px;align-items:center;background:linear-gradient(160deg,var(--card),var(--bg-2));border:1px solid var(--line);border-left:4px solid var(--lv);border-radius:16px;padding:18px 22px;transition:.2s}
+  .level:hover{transform:translateX(4px)}
+  .level.locked{opacity:.6}
+  .lv-badge{width:64px;height:64px;border-radius:14px;display:grid;place-items:center;font-weight:900;font-size:24px;color:#06160f;background:linear-gradient(150deg,var(--lv),var(--lv2))}
+  .level h3{font-size:17px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:4px}
+  .level p{color:var(--muted);font-size:14px}
+  .tag-mini{font-size:10.5px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;padding:3px 9px;border-radius:100px;background:var(--card-2);border:1px solid var(--line);color:var(--muted)}
+  .tag-go{background:rgba(31,208,122,.14);border-color:rgba(31,208,122,.3);color:var(--green)}
+  .tag-lock{background:rgba(255,107,107,.12);border-color:rgba(255,107,107,.3);color:var(--red)}
+  .flow{position:relative;margin-top:30px;padding-left:8px}
+  .step{display:grid;grid-template-columns:48px 1fr;gap:20px;position:relative;padding-bottom:26px}
+  .step:not(:last-child)::before{content:"";position:absolute;left:23px;top:48px;bottom:-4px;width:2px;background:linear-gradient(var(--line),transparent)}
+  .step-num{width:48px;height:48px;border-radius:13px;background:linear-gradient(150deg,var(--green),var(--green-deep));color:#06160f;display:grid;place-items:center;font-weight:900;font-size:18px;flex:none;z-index:1;box-shadow:0 6px 18px rgba(31,208,122,.25)}
+  .step-body{background:linear-gradient(160deg,var(--card),var(--bg-2));border:1px solid var(--line);border-radius:16px;padding:18px 22px}
+  .step-body h3{font-size:17px;margin-bottom:6px;font-weight:750}
+  .step-body p{color:var(--muted);font-size:14.5px}
+  .step-body ul{margin:10px 0 0;padding-left:18px;color:var(--muted);font-size:14px}
+  .step-body li{margin:4px 0}
+  .pill{display:inline-block;font-size:11px;font-weight:700;color:var(--green);background:rgba(31,208,122,.1);border:1px solid rgba(31,208,122,.25);padding:3px 10px;border-radius:100px;margin-top:10px}
+  .gate .step-num{background:linear-gradient(150deg,var(--gold),var(--orange));box-shadow:0 6px 18px rgba(245,196,81,.25)}
+  .code-box{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;background:#0a120e;border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:12px;color:var(--lime);overflow-x:auto;white-space:nowrap}
+  .loop{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:24px}
+  @media(max-width:820px){.loop{grid-template-columns:1fr 1fr}}
+  .loop-step{background:linear-gradient(160deg,var(--card),var(--bg-2));border:1px solid var(--line);border-radius:16px;padding:20px;text-align:center;position:relative}
+  .loop-step .ic{font-size:30px}.loop-step h4{font-size:15px;margin:8px 0 5px}.loop-step p{font-size:13px;color:var(--muted)}
+  .loop-step::after{content:"→";position:absolute;right:-12px;top:50%;transform:translateY(-50%);color:var(--green);font-weight:900;font-size:18px}
+  .loop-step:last-child::after{content:"↺"}
+  @media(max-width:820px){.loop-step::after{display:none}}
+  .codes{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:22px}
+  @media(max-width:820px){.codes{grid-template-columns:1fr}}
+  .codecard{display:flex;gap:12px;align-items:flex-start;background:linear-gradient(160deg,var(--card),var(--bg-2));border:1px solid var(--line);border-radius:13px;padding:14px 16px}
+  .codecard .k{font-family:ui-monospace,monospace;font-weight:800;font-size:12.5px;color:var(--gold);background:rgba(245,196,81,.1);border:1px solid rgba(245,196,81,.25);padding:3px 8px;border-radius:7px;flex:none;min-width:62px;text-align:center}
+  .codecard p{font-size:13.5px;color:var(--muted)}.codecard b{color:var(--ink);font-weight:650}
+  .fmtgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:18px}
+  @media(max-width:820px){.fmtgrid{grid-template-columns:1fr 1fr}}
+  @media(max-width:520px){.fmtgrid{grid-template-columns:1fr}}
+  .fmt{display:flex;gap:9px;align-items:baseline;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:9px 11px;font-size:12.5px}
+  .fmt .c{font-family:ui-monospace,monospace;color:var(--lime);font-weight:700;flex:none}
+  .fmt .d{color:var(--muted)}
+  .angle-card{background:linear-gradient(160deg,var(--card),var(--bg-2));border:1px solid var(--line);border-radius:16px;padding:20px 22px;border-left:4px solid var(--ac)}
+  .angle-card h3{font-size:18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .angle-card .spend{font-size:13px;color:var(--muted);margin-top:6px}
+  .status{font-size:10.5px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;padding:4px 10px;border-radius:100px}
+  .st-main{background:rgba(31,208,122,.16);color:var(--green);border:1px solid rgba(31,208,122,.35)}
+  .st-scale{background:rgba(92,200,255,.14);color:var(--blue);border:1px solid rgba(92,200,255,.32)}
+  .st-new{background:rgba(245,196,81,.14);color:var(--gold);border:1px solid rgba(245,196,81,.3)}
+  .test-list{margin-top:18px;display:grid;gap:10px}
+  .test-row{background:linear-gradient(160deg,var(--card),var(--bg-2));border:1px solid var(--line);border-radius:13px;padding:14px 18px}
+  .test-row .cond{font-weight:700;font-size:15px}
+  .test-row .sym{color:var(--muted);font-size:14px;margin-top:3px}
+  .test-row .sym em{color:var(--muted-2);font-style:italic}
+  .group-label{font-size:12px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold);margin:18px 0 4px}
+  .tool{display:flex;align-items:center;gap:14px;background:linear-gradient(160deg,var(--card),var(--bg-2));border:1px solid var(--line);border-radius:14px;padding:15px 18px}
+  .tool .ic{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;font-size:20px;background:var(--card-2);border:1px solid var(--line);flex:none}
+  .tool h4{font-size:15px;margin-bottom:2px}.tool p{font-size:13px;color:var(--muted)}
+  .rhythm .card h3{font-size:16px}.time-tag{font-size:11px;font-weight:800;color:var(--gold);letter-spacing:.5px}
+  .qjump{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+  .qjump a{font-size:13px;font-weight:700;text-decoration:none;color:var(--ink);background:var(--card-2);border:1px solid var(--line);padding:9px 16px;border-radius:100px;transition:.2s}
+  .qjump a:hover{border-color:var(--green);color:var(--green)}
+  .angle-divider{margin-top:34px;padding:22px 24px;border-radius:18px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;border:1px solid var(--ad-line);background:linear-gradient(135deg,var(--ad-bg),transparent);scroll-margin-top:80px}
+  .angle-divider .ad-ic{font-size:34px;line-height:1}
+  .angle-divider .ad-name{font-size:22px;font-weight:820;letter-spacing:-.4px}
+  .angle-divider .ad-out{color:var(--muted);font-size:14px;margin-top:3px}
+  .check-wrap{background:linear-gradient(160deg,var(--card),var(--bg-2));border:1px solid var(--line);border-radius:20px;padding:26px;margin-top:24px}
+  .progress{height:10px;border-radius:100px;background:var(--card-2);overflow:hidden;margin:6px 0 22px;border:1px solid var(--line)}
+  .progress-bar{height:100%;width:0;background:linear-gradient(90deg,var(--green),var(--lime));border-radius:100px;transition:width .4s ease}
+  .check-item{display:flex;align-items:flex-start;gap:13px;padding:13px 0;border-bottom:1px solid var(--line);cursor:pointer;user-select:none}
+  .check-item:last-child{border-bottom:none}
+  .box{width:24px;height:24px;border-radius:7px;border:2px solid var(--muted-2);flex:none;display:grid;place-items:center;transition:.2s;margin-top:1px}
+  .check-item.done .box{background:linear-gradient(135deg,var(--green),var(--lime));border-color:transparent}
+  .box svg{opacity:0;transition:.2s}.check-item.done .box svg{opacity:1}
+  .check-item .txt{font-size:15px}.check-item.done .txt{color:var(--muted-2);text-decoration:line-through}
+  .check-item .txt small{display:block;color:var(--muted);font-size:13px;text-decoration:none;margin-top:2px}
+  .check-item.done .txt small{color:var(--muted-2)}
+  footer{padding:50px 0 70px;text-align:center;color:var(--muted-2);font-size:13px;border-top:1px solid var(--line)}
+  footer .logo{margin:0 auto 14px}
+  .reveal{opacity:0;transform:translateY(24px);transition:.6s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="brand"><span class="logo">N</span> NEUROBELLA</div>
+    <div class="nav-links">
+      <a href="#mission">Mission</a>
+      <a href="#sheet">Master Sheet</a>
+      <a href="#levels">Levels</a>
+      <a href="#formats">Formats</a>
+      <a href="#workflow">Workflow</a>
+      <a href="#loop">Test &amp; Learn</a>
+      <a href="#angles">Angles</a>
+      <a href="#brief">Locked Briefs</a>
+      <a href="#rhythm">Rhythm</a>
+      <a href="#tools">Tools</a>
+      <a href="#start">Week 1</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap reveal">
+    <span class="eyebrow">● Creative Strategist · AMD + Diabetic Retinopathy</span>
+    <h1>Welcome to <span class="hl">Neurobella</span>.<br>Let's build winners.</h1>
+    <p class="sub">You're our new <strong>Direct Response Creative Strategist &amp; Copywriter</strong>. You'll run <strong>two angles</strong> — Macular Degeneration and Diabetic Retinopathy. This page is your operating system. Read it top to bottom before your first brief.</p>
+    <div class="hero-kpi">
+      <div class="kpi"><div class="n">30</div><div class="l">Briefs / week (total)</div></div>
+      <div class="kpi"><div class="n">2</div><div class="l">Angles (AMD + DR)</div></div>
+      <div class="kpi"><div class="n">50%</div><div class="l">Min hook rate (KPI)</div></div>
+      <div class="kpi"><div class="n">25%</div><div class="l">Min hold rate (KPI)</div></div>
+      <div class="kpi"><div class="n" style="font-size:24px;padding-top:5px">TBD</div><div class="l">Min ROAS (confirm)</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- MISSION -->
+<section id="mission">
+  <div class="wrap reveal">
+    <span class="sec-tag">01 — Your Mission</span>
+    <h2>Produce 30 high-converting briefs every week — across 2 angles</h2>
+    <p class="lead">Turn proven psychology into a constant stream of testable native ads and videos. Both angles share the same discipline: build on real avatars, mechanisms, pains and desires, then read the data and feed the next batch. Every concept is judged against the same bar: <strong>≥ 50% hook rate</strong> and <strong>≥ 25% hold rate</strong>.</p>
+
+    <div class="grid g2" style="margin-top:24px">
+      <div class="angle-card" style="--ac:#1fd07a">
+        <h3>👁️ Macular Degeneration</h3>
+        <p style="color:var(--ink);font-size:15px;margin-top:8px;font-weight:650">10 native ads + 5 videos / week</p>
+      </div>
+      <div class="angle-card" style="--ac:#5cc8ff">
+        <h3>🩸 Diabetic Retinopathy</h3>
+        <p style="color:var(--ink);font-size:15px;margin-top:8px;font-weight:650">10 native ads + 5 videos / week</p>
+      </div>
+    </div>
+    <p class="lead" style="margin-top:14px;font-size:14.5px"><strong>Weekly total:</strong> 20 native ads + 10 videos = <strong>30 briefs</strong>.</p>
+
+    <div class="grid g3" style="margin-top:22px">
+      <div class="card"><h3><span class="chip">🎯</span>Angles &amp; Avatars</h3><p>We hand you the moving parts: angles (conditions), avatars, pain points and symptoms. Your craft is combining them into briefs that convert.</p></div>
+      <div class="card"><h3><span class="chip">📰</span>Native &amp; Video</h3><p>Write tight native-ad advertorials and video scripts (VSL, UGC, AI, etc.) at the right awareness level: hook, mechanism, proof, offer and CTA.</p></div>
+      <div class="card"><h3><span class="chip">📈</span>Learnings</h3><p>After each batch is tested, you read the data and write the learnings. They shape the next 30.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRINCIPLE -->
+<section>
+  <div class="wrap reveal">
+    <div class="banner">
+      <div class="big">⚙️</div>
+      <div>
+        <h3>The #1 rule: don't reinvent the wheel</h3>
+        <p>We already know what works in the ad account. Your starting point is always the <strong>existing winning combinations</strong> — the avatar + desire + pain + mechanism pairings that already produced winners. Build on proven psychology first; vary with intention.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MASTER SHEET -->
+<section id="sheet">
+  <div class="wrap reveal">
+    <span class="sec-tag">02 — The Brain</span>
+    <h2>The Creative Master Sheet</h2>
+    <p class="lead">One sheet is the source of truth. It holds every past winning ad with a full breakdown so you never start from a blank page. You'll get a Loom walkthrough — keep it organized and log all your work here. <strong>The Master Sheet is internal only</strong> (you, the founder, and Claude). Editors never touch it — they receive their tasks in Notion.</p>
+    <div class="grid g4">
+      <div class="card"><h3>🏆 Winning Ads</h3><p>Every ad that won in the account, with what made it work.</p></div>
+      <div class="card"><h3>🧠 Avatar &amp; Desire</h3><p>The avatar and core desire behind each winner.</p></div>
+      <div class="card"><h3>💢 Pain &amp; Symptoms</h3><p>The exact pains and symptoms the ad spoke to.</p></div>
+      <div class="card"><h3>🔬 Mechanism &amp; Format</h3><p>The hook, mechanism and the winning creative format.</p></div>
+    </div>
+    <p class="lead" style="margin-top:18px"><strong>Study the Legend tab</strong> too — it lists every concept level, creative format and iteration code. You're expected to know which formats are currently winning in the market. Before creating anything, ask of each winner: <em>why did it work, why not?</em> Form a hypothesis, then build.</p>
+  </div>
+</section>
+
+<!-- LEVELS -->
+<section id="levels">
+  <div class="wrap reveal">
+    <span class="sec-tag">03 — The System</span>
+    <h2>The 5 Concept Levels</h2>
+    <p class="lead">Every brief is tagged with a concept level. <strong>You always start at Level 2.</strong> Then, as learnings come in, you move into Levels 3, 4 and 5 on the winners. <strong>Level 1 is not in your scope</strong> — net-new concepting is handled by the founder/team.</p>
+    <div class="levels">
+      <div class="level locked" style="--lv:#ff6b6b;--lv2:#ff8a4c">
+        <div class="lv-badge">1</div>
+        <div><h3>Net New Concepts <span class="tag-mini tag-lock">🔒 Not your scope</span></h3><p>Completely new angles or mechanisms unseen in the ad account (sourced from Kalodata, organic, competitors, etc.). Owned by the founder/team — not part of your weekly output.</p></div>
+      </div>
+      <div class="level" style="--lv:#f5c451;--lv2:#ff8a4c">
+        <div class="lv-badge">2</div>
+        <div><h3>New Structural Formats <span class="tag-mini tag-go">▶ Start here</span></h3><p>Same mechanism / angle / desire, delivered in a <strong>different script format or narrative style</strong> — e.g. testimonial-driven, UGC storyline, advertorial, etc. This is your default entry point for every avatar. Go to <strong>AdSpy</strong> to spy on winning creatives and source the <strong>new structural formats</strong> worth modeling.</p></div>
+      </div>
+      <div class="level" style="--lv:#b8f04a;--lv2:#1fd07a">
+        <div class="lv-badge">3</div>
+        <div><h3>Major Variations on Winners <span class="tag-mini">After learnings</span></h3><p>Same core idea, adjusted for a <strong>new symptom, desire, avatar or tone</strong> — e.g. pain relief → mobility, AI voice → doctor, swapped mechanism.</p></div>
+      </div>
+      <div class="level" style="--lv:#1fd07a;--lv2:#0fa860">
+        <div class="lv-badge">4</div>
+        <div><h3>Lead / Stitch Variations <span class="tag-mini">After learnings</span></h3><p>Variations on winning concepts — creating "Level 4" <strong>lead / stitch</strong> variations on the winners.</p></div>
+      </div>
+      <div class="level" style="--lv:#0fa860;--lv2:#0b7a48">
+        <div class="lv-badge">5</div>
+        <div><h3>Hook Variations <span class="tag-mini">After learnings</span></h3><p>Variations on winning concepts — creating "Level 5" <strong>hook</strong> variations to keep fresh creative running and fight fatigue while scaling.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMATS & CODES -->
+<section id="formats">
+  <div class="wrap reveal">
+    <span class="sec-tag">04 — The Language</span>
+    <h2>Creative formats &amp; iteration codes</h2>
+    <p class="lead">From the Legend tab. Use the <strong>creative format code</strong> in every Notion naming convention, and use the <strong>iteration codes</strong> to define exactly what changes when you vary a winner.</p>
+
+    <h3 style="margin-top:26px;font-size:16px;color:var(--gold);letter-spacing:.5px">↻ Iteration codes — what you change on a winner</h3>
+    <div class="codes">
+      <div class="codecard"><span class="k">IT-VIS</span><p><b>New Visuals</b> — different B-roll or visual sequences.</p></div>
+      <div class="codecard"><span class="k">IT-ACT</span><p><b>New Actor</b> — reshot with a different person.</p></div>
+      <div class="codecard"><span class="k">IT-SS</span><p><b>New Hook</b> — different first 3 seconds.</p></div>
+      <div class="codecard"><span class="k">IT-CPY</span><p><b>New Copy</b> — different text overlays or headlines.</p></div>
+      <div class="codecard"><span class="k">IT-OF</span><p><b>New Offer</b> — different close or offer for the product.</p></div>
+      <div class="codecard"><span class="k">IT-LEAD</span><p><b>New Lead</b> — new awareness level or audience segment.</p></div>
+      <div class="codecard"><span class="k">IT-ANGL</span><p><b>New Angle</b> — different angle, everything else the same.</p></div>
+    </div>
+
+    <h3 style="margin-top:30px;font-size:16px;color:var(--lime);letter-spacing:.5px">🎬 Creative format types</h3>
+    <div class="fmtgrid">
+      <div class="fmt"><span class="c">StoryVSL</span><span class="d">Story based VSL</span></div>
+      <div class="fmt"><span class="c">UGC</span><span class="d">User-generated style</span></div>
+      <div class="fmt"><span class="c">FPVSL</span><span class="d">First person VSL</span></div>
+      <div class="fmt"><span class="c">VVSL</span><span class="d">Voiceover VSL</span></div>
+      <div class="fmt"><span class="c">ProductVSL</span><span class="d">Product focused VSL</span></div>
+      <div class="fmt"><span class="c">AISPVL</span><span class="d">Conspiracy VSL</span></div>
+      <div class="fmt"><span class="c">FS</span><span class="d">Founder's story</span></div>
+      <div class="fmt"><span class="c">PodcastAI</span><span class="d">Podcast AI</span></div>
+      <div class="fmt"><span class="c">SpeechAI</span><span class="d">Speech AI (on stage)</span></div>
+      <div class="fmt"><span class="c">ConspUGC</span><span class="d">Conspiracy UGC</span></div>
+      <div class="fmt"><span class="c">ConspAI</span><span class="d">Conspiracy AI</span></div>
+      <div class="fmt"><span class="c">THUGC</span><span class="d">Talking head UGC</span></div>
+      <div class="fmt"><span class="c">THAI</span><span class="d">Talking head AI</span></div>
+      <div class="fmt"><span class="c">PodcastDF</span><span class="d">Podcast deepfake</span></div>
+      <div class="fmt"><span class="c">SpeechDF</span><span class="d">Speech deepfake</span></div>
+      <div class="fmt"><span class="c">THDF</span><span class="d">Talking head deepfake</span></div>
+      <div class="fmt"><span class="c">ConspDF</span><span class="d">Conspiracy deepfake</span></div>
+      <div class="fmt"><span class="c">VOBR</span><span class="d">Voiceover + B-rolls</span></div>
+      <div class="fmt"><span class="c">Static</span><span class="d">Static image creative</span></div>
+      <div class="fmt"><span class="c">LFStatic</span><span class="d">Long form static script</span></div>
+      <div class="fmt"><span class="c">VSLStatic</span><span class="d">VSL static</span></div>
+      <div class="fmt"><span class="c">ToSStyle</span><span class="d">Text on screen style</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- WORKFLOW -->
+<section id="workflow">
+  <div class="wrap reveal">
+    <span class="sec-tag">05 — How You Work</span>
+    <h2>Your weekly workflow</h2>
+    <p class="lead">Follow this every cycle, for both angles. The research gate is non-negotiable — nothing gets briefed until your research is approved.</p>
+    <div class="flow">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Deep-dive: avatar &amp; angle research</h3>
+          <p>Start with the avatar and the angle. <strong>Angle = the condition we target</strong> (macular degeneration, diabetic retinopathy). Do real voice-of-customer research to learn how the customer thinks — manual digging plus Claude.</p>
+          <ul>
+            <li><strong>Amazon reviews</strong> — the exact language, pains and desires</li>
+            <li><strong>Reddit</strong> — communities around the angle/condition</li>
+            <li><strong>Facebook groups</strong> — for the angles we're running</li>
+            <li>Use Claude to organize and pressure-test your findings</li>
+          </ul>
+        </div>
+      </div>
+      <div class="step gate">
+        <div class="step-num">✓</div>
+        <div class="step-body">
+          <h3>Research approval gate</h3>
+          <p>Send your research over for review <strong>before</strong> any briefs are written. Once it's signed off, you're cleared to build.</p>
+          <span class="pill">⛔ No briefs until research is approved</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Mine winning creative</h3>
+          <p>Go to <strong>AdSpy</strong>, the Meta Ad Library, Kalodata and the competitor tools we give you. Pull proven structures worth modeling — for both native ads and videos — fuel for your Level 2 reworks.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>Write the 30 briefs</h3>
+          <p>Per angle: <strong>10 native ads + 5 videos</strong>. Choose the format (advertorial/native or VSL, UGC, AI, etc.), match each to the <strong>right awareness level</strong>, tag the <strong>concept level (start at 2)</strong>, and write clean DR copy: hook → mechanism → proof → offer → CTA. Target ≥50% hook / ≥25% hold.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h3>Log everything in the Master Sheet</h3>
+          <p>Add every brief into the Creative Master Sheet with its angle, avatar, pain, mechanism, format and concept level. Stay ruthlessly organized — the sheet is the system.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <h3>Create the Notion card</h3>
+          <p>After the sheet is locked, create a card on the Notion board using the exact <strong>naming convention</strong> — so when it's live in Meta you instantly know which concept it is.</p>
+          <div class="code-box">[Batch] · [Concept name] · [Angle] · [Awareness level] · [Format code] · [Goal]</div>
+          <div class="code-box">B12 · Macular-Starvation · Macular-Degeneration · Problem-Aware · Advertorial · Beat-control</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-body">
+          <h3>Direct the editors</h3>
+          <p>Editors pick up their tasks <strong>in Notion</strong> (not the Master Sheet). Direct them clearly so each brief becomes a strong native ad or video. You own the creative vision through to delivery.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">7</div>
+        <div class="step-body">
+          <h3>Feedback loop &amp; learnings <span style="font-size:12px;color:var(--gold);font-weight:700">(manual)</span></h3>
+          <p>Once the batch is live, <strong>let the creatives run ~7 days</strong>, then go through the data <strong>manually</strong> to see <em>why the batch is winning or losing</em>. Those learnings decide the next batch — you don't guess, you build on what the data says.</p>
+          <ul>
+            <li>Ask the <strong>media buyer</strong> for the data, or</li>
+            <li>Check <strong>Adnova creative analytics</strong>, or</li>
+            <li>Pull it from <strong>Meta Ads Manager</strong> if you have access</li>
+          </ul>
+          <span class="pill">Winners → Level 3, 4 &amp; 5 variations · Losers → cut &amp; document why</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOOP -->
+<section id="loop">
+  <div class="wrap reveal">
+    <span class="sec-tag">06 — The Engine</span>
+    <h2>Brief → Test → Learn → Repeat</h2>
+    <p class="lead">This loop is what makes us better every week. Briefs without learnings is just guessing.</p>
+    <div class="loop">
+      <div class="loop-step"><div class="ic">🎬</div><h4>Brief &amp; Ship</h4><p>30 briefs go live as ads</p></div>
+      <div class="loop-step"><div class="ic">⏱️</div><h4>Test ~7 Days</h4><p>Let the data accumulate</p></div>
+      <div class="loop-step"><div class="ic">📊</div><h4>Read the Data</h4><p>Hook, hold, ROAS — manually</p></div>
+      <div class="loop-step"><div class="ic">🧪</div><h4>Write Learnings</h4><p>Why it won / didn't → next batch</p></div>
+    </div>
+    <p class="lead" style="margin-top:20px">After ~7 days, go through the numbers (media buyer, Adnova or Ads Manager) and write the <strong>learnings</strong>: <em>why did it work, why did it not?</em> Winners then graduate into Level 3, 4 and 5 variations. Those learnings directly inform the next 30 briefs.</p>
+  </div>
+</section>
+
+<!-- WINNING ANGLES -->
+<section id="angles">
+  <div class="wrap reveal">
+    <span class="sec-tag">07 — The Battlefield</span>
+    <h2>Our angles</h2>
+    <p class="lead">We sell eye supplements, so an <strong>angle = the health condition we target</strong>. <strong>You own both angles below.</strong> The rest is context and pipeline.</p>
+
+    <div class="grid g2" style="margin-top:24px">
+      <div class="angle-card" style="--ac:#1fd07a">
+        <h3>👁️ Macular Degeneration <span class="status st-main">Your angle</span></h3>
+        <p style="color:var(--muted);font-size:14.5px;margin-top:8px">Our core, proven angle — the foundation of the account.</p>
+        <div class="spend">💰 <strong>€2M+</strong> spent here</div>
+      </div>
+      <div class="angle-card" style="--ac:#5cc8ff">
+        <h3>🩸 Diabetic Retinopathy <span class="status st-scale">Your angle</span></h3>
+        <p style="color:var(--muted);font-size:14.5px;margin-top:8px">Recently tested and performing well — we're scaling it now.</p>
+      </div>
+    </div>
+
+    <div class="banner amber" style="margin-top:18px">
+      <div class="big">🧪</div>
+      <div>
+        <h3>Pipeline angles <span class="status st-new" style="vertical-align:middle">Context only</span></h3>
+        <p>Fresh angles (and new products / SKUs) we may validate later — not your scope right now, but useful context: high blood pressure, high cholesterol, PCOS (cardiovascular / metabolic) and Graves' disease, preeclampsia (thyroid / hormonal).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCKED BRIEFS -->
+<section id="brief">
+  <div class="wrap reveal">
+    <span class="sec-tag" style="color:var(--gold)">★ Your Locked Briefs</span>
+    <h2>The moving parts you'll run — 2 angles</h2>
+    <p class="lead">These are the <strong>approved moving parts</strong>. Each angle has its own avatars, mechanism (UMP + UMS), symptoms and pain points. Use the same swipe language within each angle, don't drift, and vary the <em>format and structure</em> (Level 2+), never the core psychology.</p>
+    <div class="qjump">
+      <a href="#brief-amd">👁️ Macular Degeneration</a>
+      <a href="#brief-dr">🩸 Diabetic Retinopathy</a>
+    </div>
+
+    <!-- ===== ANGLE 1: MACULAR DEGENERATION ===== -->
+    <div class="angle-divider" id="brief-amd" style="--ad-bg:rgba(31,208,122,.12);--ad-line:rgba(31,208,122,.3)">
+      <div class="ad-ic">👁️</div>
+      <div style="flex:1;min-width:220px">
+        <div class="ad-name">Angle 1 — Macular Degeneration</div>
+        <div class="ad-out">Weekly output: <strong style="color:var(--ink)">10 native ads + 5 videos</strong></div>
+      </div>
+    </div>
+
+    <div class="group-label" style="color:var(--green)">Avatar 1 — “The Frightened Newly-Diagnosed”</div>
+    <div class="angle-card" style="--ac:#1fd07a">
+      <p style="color:var(--muted);font-size:14.5px">Adults roughly <strong>60–79, skewing toward older women</strong>, recently or early-diagnosed with macular degeneration and frightened they are going blind. They struggle to read medication bottles, recognize faces, and drive — losing independence and dreading becoming a burden on grown children. Told by rushed doctors that <strong>nothing can be done</strong>, they feel hopeless but are searching for a way to feed and protect their failing vision.</p>
+      <div style="margin-top:14px;padding:14px 16px;background:rgba(31,208,122,.07);border:1px solid rgba(31,208,122,.25);border-radius:12px">
+        <div style="font-size:11px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--green);margin-bottom:7px">🔥 Their Desire</div>
+        <p style="color:var(--ink);font-size:14px">“From ‘you'll be blind within a year’ to 20/20. Perfect vision. No surgery. No needles.”</p>
+      </div>
+    </div>
+
+    <div class="group-label" style="color:var(--green)">Avatar 2 — “The Desperate Realist”</div>
+    <div class="angle-card" style="--ac:#1fd07a">
+      <p style="color:var(--muted);font-size:14.5px">A <strong>65–70 year old</strong> recently diagnosed with macular degeneration (AMD), told by their doctor there's <strong>no cure</strong> and offered only <strong>$2,000/month eye injections</strong> that might slow blindness. They've given up driving, can't see their grandchildren's faces or read the newspaper, and feel their life is over. <strong>Distrustful of doctors yet desperate</strong>, they have a supportive spouse who researches alternatives, and want their vision back without surgery or needles.</p>
+      <div style="margin-top:14px;padding:14px 16px;background:rgba(31,208,122,.07);border:1px solid rgba(31,208,122,.25);border-radius:12px">
+        <div style="font-size:11px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--green);margin-bottom:7px">🔥 Their Desire</div>
+        <p style="color:var(--ink);font-size:14px">“I am <strong>NOT</strong> going on injections for the rest of my life. I'm not following my mother's path. There has to be another way. I don't want to go blind.”</p>
+      </div>
+    </div>
+
+    <div class="group-label" style="color:var(--red)">Unique Mechanism — Problem / Root Cause <span style="color:var(--muted-2);font-weight:600;text-transform:none;letter-spacing:0">· "Macular Starvation"</span></div>
+    <div class="angle-card" style="--ac:#ff6b6b">
+      <p style="color:var(--muted);font-size:14.5px">The reason your vision keeps declining even though you're “doing everything right” is that you're <strong>missing the nutrients your macula actually NEEDS to rebuild its protective pigment</strong>. When you're depleted, your macula is <strong>completely exposed</strong>: blue-light damage accelerates, oxidative stress destroys your photoreceptors — <strong>photoreceptor death from chronic macular starvation</strong>.</p>
+      <p style="color:var(--ink);font-size:14.5px;margin-top:12px">And not once did anyone say: “maybe we should look at what's <strong>causing</strong> your macular degeneration instead of just treating the symptoms forever.” No amount of leafy greens or sunglasses is going to fix the underlying problem.</p>
+    </div>
+
+    <div class="group-label" style="color:var(--green)">Unique Mechanism — Solution <span style="color:var(--muted-2);font-weight:600;text-transform:none;letter-spacing:0">· 15 ingredients · complete macular protection</span></div>
+    <div class="angle-card" style="--ac:#1fd07a">
+      <p style="color:var(--muted);font-size:14.5px">Feed the macula what it needs to rebuild its protective pigment — with nutrients at the doses used in clinical research.</p>
+      <div class="test-list" style="margin-top:14px">
+        <div class="test-row"><div class="cond">All 3 macular carotenoids — clinical doses</div><div class="sym">Lutein <strong>20mg</strong> (most competitors use 5–10mg) · Zeaxanthin <strong>2mg</strong> · Meso-Zeaxanthin <strong>2mg</strong> (most skip it entirely).</div></div>
+        <div class="test-row"><div class="cond">Saffron Extract</div><div class="sym">Clinical studies show it improves retinal cell function.</div></div>
+        <div class="test-row"><div class="cond">Astaxanthin</div><div class="sym">6,000× more powerful than Vitamin C at stopping oxidative damage.</div></div>
+        <div class="test-row"><div class="cond">Bilberry + Ginkgo Biloba</div><div class="sym">Improve blood flow to the retina.</div></div>
+        <div class="test-row"><div class="cond">AREDS2 base</div><div class="sym">Omega-3s, Zinc &amp; Copper in the AREDS2 ratio. 15 ingredients total — complete macular protection.</div></div>
+      </div>
+    </div>
+
+    <div class="group-label">Symptoms — swipe language</div>
+    <div class="test-list">
+      <div class="test-row"><div class="cond">Blurry / declining central vision</div><div class="sym">The center of sight fading, smearing, or patchy.</div></div>
+      <div class="test-row"><div class="cond">Dark spot in central vision</div><div class="sym">A dark or empty spot blotting out whatever you look straight at.</div></div>
+      <div class="test-row"><div class="cond">Foggy / hazy vision</div><div class="sym">A film or haze over everything.</div></div>
+      <div class="test-row"><div class="cond">Can't recognize faces across a room <span class="status st-main">Deepest</span></div><div class="sym">Can't see the grandchildren's faces.</div></div>
+      <div class="test-row"><div class="cond">Can't read fine print, the phone or the newspaper</div><div class="sym">Holding it at arm's length under a brighter and brighter lamp.</div></div>
+      <div class="test-row"><div class="cond">Can't see the TV clearly</div><div class="sym">Giving up on the simple pleasures of the day.</div></div>
+      <div class="test-row"><div class="cond">Washed-out, dull, fading colors</div><div class="sym">The world losing its color.</div></div>
+      <div class="test-row"><div class="cond">Night glare / halos / starbursts</div><div class="sym">Headlights exploding into blinding bursts — terrified to drive after dark.</div></div>
+      <div class="test-row"><div class="cond">Poor night vision</div><div class="sym">The world shrinking to the hours before sunset.</div></div>
+      <div class="test-row"><div class="cond">Lost peripheral / tunnel vision</div><div class="sym">The edges closing in.</div></div>
+      <div class="test-row"><div class="cond">Eye fatigue / strain &amp; floaters</div><div class="sym">Tired, strained eyes; dark specks drifting across vision.</div></div>
+      <div class="test-row"><div class="cond">Drusen deposits in the macula</div><div class="sym">The clinical marker the doctor pointed to.</div></div>
+      <div class="test-row"><div class="cond">Can't see step edges / curbs</div><div class="sym">Depth- and edge-perception loss causing trips and falls.</div></div>
+    </div>
+
+    <div class="group-label" style="color:var(--red)">Pain Points</div>
+    <div class="test-list">
+      <div class="test-row"><div class="cond">Fear of ending up blind like a parent <span class="status st-main">Master fear</span></div><div class="sym">Watching where the disease leads — and dreading the same path.</div></div>
+      <div class="test-row"><div class="cond">Fear &amp; dread of needles / injections in the eyes</div><div class="sym">The dread of injections for the rest of their life.</div></div>
+      <div class="test-row"><div class="cond">Anxiety &amp; dread before every appointment</div><div class="sym">The knot in the stomach for days before.</div></div>
+      <div class="test-row"><div class="cond">Loss of independence</div><div class="sym">Gave up driving, reliant on others, dread of becoming a burden.</div></div>
+      <div class="test-row"><div class="cond">Can't see the grandchildren's faces</div><div class="sym">Missing the faces and milestones they waited their whole life for.</div></div>
+      <div class="test-row"><div class="cond">Betrayed &amp; lied to by doctors / a profit-driven system</div><div class="sym">Shuffled through, treated like a number.</div></div>
+      <div class="test-row"><div class="cond">Rage: did everything right, still not enough <span class="status st-new">Hero pain</span></div><div class="sym">The injustice of declining despite trying.</div></div>
+      <div class="test-row"><div class="cond">Trapped between blindness and unwanted treatments</div><div class="sym">Blindness on one side, needles on the other.</div></div>
+      <div class="test-row"><div class="cond">Wasted money on failed eye supplements</div><div class="sym">Burned by drugstore vitamins that did nothing — skeptical now.</div></div>
+      <div class="test-row"><div class="cond">Watching a loved one disappear to the disease</div><div class="sym">Losing someone to it, slowly.</div></div>
+      <div class="test-row"><div class="cond">Giving up the life they loved / life feels over</div><div class="sym">Travel, TV, normal living — slipping away; hopelessness.</div></div>
+      <div class="test-row"><div class="cond">Crushing cost of treatment</div><div class="sym">$2,000/month injections that only “might” slow it.</div></div>
+      <div class="test-row"><div class="cond">Urgency — permanent, irreversible vision loss</div><div class="sym">The terror that once it's gone, it's gone.</div></div>
+    </div>
+
+    <!-- ===== ANGLE 2: DIABETIC RETINOPATHY ===== -->
+    <div class="angle-divider" id="brief-dr" style="--ad-bg:rgba(92,200,255,.12);--ad-line:rgba(92,200,255,.3)">
+      <div class="ad-ic">🩸</div>
+      <div style="flex:1;min-width:220px">
+        <div class="ad-name">Angle 2 — Diabetic Retinopathy</div>
+        <div class="ad-out">Weekly output: <strong style="color:var(--ink)">10 native ads + 5 videos</strong></div>
+      </div>
+    </div>
+
+    <div class="group-label" style="color:var(--blue)">Avatar 1 — “The Newly Diagnosed” <span style="color:var(--muted-2);font-weight:600;text-transform:none;letter-spacing:0">· dodge the needle</span></div>
+    <div class="angle-card" style="--ac:#5cc8ff">
+      <p style="color:var(--muted);font-size:14.5px">A <strong>59-year-old</strong> who's lived with type 2 diabetes for more than a decade, just told at a routine eye screening that the doctor now sees “the first changes” — microaneurysms and tiny dot-like bleeds, the earliest warning signs of diabetic retinopathy. They're at the very start of the disease and terrified of where it leads — because they've <strong>already watched where it leads</strong>: a mother who also had diabetes, endured years of eye injections (Eylea, Lucentis) and laser, lost her independence one appointment at a time, and went blind anyway. They carry the gnawing dread that they're walking their mother's exact path — and underneath it, the guilt that maybe they did this to themselves, even though they've been trying. <strong>Skeptical of supplements</strong> after wasting money on drugstore eye vitamins that did nothing, <strong>enraged at a profit-driven medical system</strong> that shuffles them through “step-therapy,” bills $2,000 a needle, and treats them like a number on a conveyor belt. They are fiercely determined to <strong>dodge the needle</strong>, refuse to believe injections are the only road, and find a real, root-cause alternative before it's too late.</p>
+      <div style="margin-top:14px;padding:14px 16px;background:rgba(92,200,255,.07);border:1px solid rgba(92,200,255,.25);border-radius:12px">
+        <div style="font-size:11px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--blue);margin-bottom:7px">🔥 Their Desire</div>
+        <p style="color:var(--ink);font-size:14px">“I am <strong>NOT</strong> going on injections for the rest of my life. I'm not following my mother's path. There has to be another way.”</p>
+        <p style="color:var(--ink);font-size:14px;margin-top:8px">“I don't want to go blind and stick needles in my eyes. I want 20/20 clear vision like I did in my 20s.”</p>
+      </div>
+    </div>
+
+    <div class="group-label" style="color:var(--blue)">Avatar 2 — “The Treadmill Veteran” <span style="color:var(--muted-2);font-weight:600;text-transform:none;letter-spacing:0">· already on the shots, wants more</span></div>
+    <div class="angle-card" style="--ac:#5cc8ff">
+      <p style="color:var(--muted);font-size:14.5px">A <strong>68-year-old</strong> who's lived with type 2 diabetes for nearly twenty years and has had <strong>diagnosed diabetic retinopathy for the last four</strong>. They're not at the “early changes” stage anymore — they're <strong>in the loop</strong>: anti-VEGF injections (Eylea, then Lucentis) every several weeks, a round of laser already behind them. They know the cold metal clamp, the needle coming down, the days afterward with a bloodshot, blood-pooled eye and a gritty ache, the dark “little dementors” of floaters that drift across everything. They've stopped driving at night because the headlights bloom into blinding starbursts, and they've started holding the newspaper at arm's length under a brighter and brighter lamp. And the cruelest part: they do everything right — a <strong>textbook A1C</strong> — and still hear “there's new leaking” at nearly every visit. They're exhausted by it, the bone-deep 24/7/365 burnout, and underneath the exhaustion is the fear they never say out loud: that <strong>this only moves one direction</strong>, that they're not stopping it, just managing how fast they go blind. They've already wasted money on drugstore eye vitamins that did nothing. They're <strong>not looking to quit their treatment — they're terrified to</strong>. They're looking for the thing no one in that 15-minute appointment ever gave them: <strong>something they can do themselves, between the shots</strong>, to hold onto the sight they have left.</p>
+      <div style="margin-top:14px;padding:14px 16px;background:rgba(92,200,255,.07);border:1px solid rgba(92,200,255,.25);border-radius:12px">
+        <div style="font-size:11px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--blue);margin-bottom:7px">🔥 Their Desire</div>
+        <p style="color:var(--ink);font-size:14px">“I'm already on the injections — and my eyes keep getting worse anyway. I refuse to just sit in that chair every few weeks and watch myself go blind. There has to be more I can do than wait between shots.”</p>
+      </div>
+    </div>
+
+    <div class="group-label" style="color:var(--red)">Unique Mechanism — Problem / Root Cause <span style="color:var(--muted-2);font-weight:600;text-transform:none;letter-spacing:0">· "The A1C Trap → Two Battlefields"</span></div>
+    <div class="angle-card" style="--ac:#ff6b6b">
+      <p style="color:var(--muted);font-size:14.5px">Your A1C measures the sugar in your <strong>blood</strong>. But the damage to your eyes isn't happening in your blood — it's happening <strong>inside the eye itself</strong>, behind a wall your blood sugar simply can't reach. That's why you can do everything right, bring your A1C down to a perfect 5.7 — and still sit in the chair and hear <em>“there's new leaking.”</em> It feels like a punishment. It feels like you failed. <strong>You didn't.</strong></p>
+      <p style="color:var(--ink);font-size:14.5px;margin-top:12px"><strong>The one thing no one explained:</strong> there are <strong>two battlefields</strong>. Your insulin, pills, diet and finger-sticks all fight on the first one — your bloodstream. But the leaking, swelling and bleeding happen on the <strong>second battlefield</strong>, deep inside the eye, where nothing in your current treatment was ever built to go. You haven't been losing. You've been <strong>fighting in the wrong place.</strong></p>
+      <span class="pill" style="color:var(--gold);background:rgba(245,196,81,.1);border-color:rgba(245,196,81,.25)">Hero pain: plant the A1C betrayal in agitation → pay it off with the two-battlefields reveal</span>
+    </div>
+
+    <div class="group-label" style="color:var(--green)">Unique Mechanism — Solution <span style="color:var(--muted-2);font-weight:600;text-transform:none;letter-spacing:0">· 15 ingredients · not a blood-sugar pill</span></div>
+    <div class="angle-card" style="--ac:#1fd07a">
+      <p style="color:var(--muted);font-size:14.5px">Fight on the battlefield your blood sugar can't reach — nutrients that actually get <strong>inside the eye</strong> and work right where the damage is. It doesn't touch your glucose at all; it does the one job blood-sugar control never could: it shows up on the second battlefield, where the leaking begins.</p>
+      <div class="test-list" style="margin-top:14px">
+        <div class="test-row"><div class="cond">3 retinal carotenoids — at clinical doses</div><div class="sym">Lutein <strong>20mg</strong> (competitors use 5–10mg) · Zeaxanthin <strong>2mg</strong> · Meso-Zeaxanthin <strong>2mg</strong> (most skip it). The only nutrients that physically cross into the retina.</div></div>
+        <div class="test-row"><div class="cond">Alpha-Lipoic Acid — 50mg</div><div class="sym">The one antioxidant studied directly for diabetic eyes &amp; nerves; works in both the watery and fatty parts of cells. The piece generic eye vitamins leave out.</div></div>
+        <div class="test-row"><div class="cond">Astaxanthin</div><div class="sym">6,000× more powerful than Vitamin C at stopping the oxidative “rust” that corrodes fragile capillary walls.</div></div>
+        <div class="test-row"><div class="cond">Bilberry Extract — 50mg</div><div class="sym">Anthocyanins that strengthen the walls of tiny blood vessels so they hold fluid where it belongs.</div></div>
+        <div class="test-row"><div class="cond">Ginkgo Biloba + Saffron Extract</div><div class="sym">Ginkgo drives blood flow into the smallest retinal vessels; saffron improves retinal cell function (clinically studied).</div></div>
+        <div class="test-row"><div class="cond">Taurine + Luteolin + AREDS2 base</div><div class="sym">Support retinal cells &amp; calm inflammation, with Vitamin C, Vitamin E, Omega-3s, Zinc &amp; Copper in the AREDS2 ratio.</div></div>
+      </div>
+    </div>
+
+    <div class="group-label">Symptoms — swipe language</div>
+    <div class="test-list">
+      <div class="test-row"><div class="cond">Floaters</div><div class="sym">“little dark dementors that drift and dance in the corner of your eye, casting shadows over everything you try to look at.”</div></div>
+      <div class="test-row"><div class="cond">The dark red cloud <em>(vitreous hemorrhage)</em></div><div class="sym">“waking up to a dark red cloud slowly spreading across your vision — like a drop of ink in a glass of water.”</div></div>
+      <div class="test-row"><div class="cond">The blur that comes and goes</div><div class="sym">“clear one hour and smeared the next — never knowing if today is a good eye day or a bad one.”</div></div>
+      <div class="test-row"><div class="cond">The dark spot in central vision</div><div class="sym">“a dark, empty spot sitting right in the center of your sight — blotting out the very thing you're trying to look straight at.”</div></div>
+      <div class="test-row"><div class="cond">The blinding headlights</div><div class="sym">“oncoming headlights exploding into white starbursts, so you stop driving after dark and your world shrinks to before sunset.”</div></div>
+      <div class="test-row"><div class="cond">The reading you've lost</div><div class="sym">“holding the paper at arm's length, giving up on the book on your nightstand, unable to thread a needle.”</div></div>
+      <div class="test-row"><div class="cond">The faces you can't see <span class="status st-main">Deepest</span></div><div class="sym">“looking across the room at your grandchild's smile — and not being able to see it clearly.”</div></div>
+      <div class="test-row"><div class="cond">The gritty burn</div><div class="sym">“that scratchy, sandy, grit-in-the-eye feeling that never fully goes away.”</div></div>
+    </div>
+
+    <div class="group-label" style="color:var(--orange)">Pain Points — Treatment Trauma</div>
+    <div class="test-list">
+      <div class="test-row"><div class="cond">The needle &amp; “the claw”</div><div class="sym">“that cold metal claw clamped over your eyelid to force it open — pinned, staring up, helpless, as the needle comes slowly down.”</div></div>
+      <div class="test-row"><div class="cond">The dread before</div><div class="sym">“the knot in your stomach for days before the appointment — the dread no one else seems to understand.”</div></div>
+      <div class="test-row"><div class="cond">The aftermath</div><div class="sym">“days of sandy, scraping ache, the pressure, and the bloodshot horror-movie eye that scares your own grandchildren.”</div></div>
+      <div class="test-row"><div class="cond">The laser <em>(PRP)</em></div><div class="sym">“staring into a barcode scanner while someone splits your skull — a ‘cure’ that quietly steals your side and night vision and speeds up cataracts.”</div></div>
+      <div class="test-row"><div class="cond">The surgery <em>(vitrectomy)</em></div><div class="sym">“weeks trapped face-down, neck and back screaming, the bubble sitting inside the eye — and the dread of having to do it all again.”</div></div>
+      <div class="test-row"><div class="cond">The treadmill itself</div><div class="sym">“put out one fire, and three months later you're back in the chair for the next. And the next. With no end in sight.”</div></div>
+    </div>
+
+    <div class="group-label" style="color:var(--red)">Pain Points — The Invisible Wounds <span style="color:var(--muted-2);font-weight:600;text-transform:none;letter-spacing:0">· weight your word count here</span></div>
+    <div class="test-list">
+      <div class="test-row"><div class="cond">Diabetes burnout</div><div class="sym">“that bone-deep exhaustion of managing this 24/7/365 — testing, logging, counting, watching — with no day off, ever.”</div></div>
+      <div class="test-row"><div class="cond">The A1C betrayal <span class="status st-new">Hero pain</span></div><div class="sym">“you did everything they asked, got your A1C to a perfect 5.7 — and still heard ‘there's new leaking.’” Bridges straight into the mechanism.</div></div>
+      <div class="test-row"><div class="cond">The guilt</div><div class="sym">“the quiet voice that says you did this to yourself.” → the mechanism lifts it: <strong>it was never your fault.</strong></div></div>
+      <div class="test-row"><div class="cond">Fear of becoming a burden</div><div class="sym">“lying awake afraid of the day you can't drive, read your own mail, or manage on your own — the burden to your kids.”</div></div>
+      <div class="test-row"><div class="cond">Lost independence</div><div class="sym">“your car keys, your books, the simple dignity of doing things yourself — taken one appointment at a time.”</div></div>
+      <div class="test-row"><div class="cond">Treated like a number</div><div class="sym">“a clinical case on a conveyor belt — a chart, a billing code — instead of a person terrified of going blind.”</div></div>
+      <div class="test-row"><div class="cond">Going blind <span class="status st-main">Master fear</span></div><div class="sym">“the fear that doesn't even have words — the #1 cause of irreversible blindness, and deep down you already know it.”</div></div>
+      <div class="test-row"><div class="cond">The one-way street</div><div class="sym">“every appointment another inch surrendered — you're not stopping this, you're just managing how fast you go blind.”</div></div>
+      <div class="test-row"><div class="cond">The bleed with no warning</div><div class="sym">“going to sleep not knowing if tonight's the night a vessel finally lets go.”</div></div>
+      <div class="test-row"><div class="cond">Helplessness after the A1C betrayal</div><div class="sym">“if a perfect 5.7 still wasn't enough — what hope is even left?” → answered by the two-battlefields reveal.</div></div>
+      <div class="test-row"><div class="cond">Missing the moments</div><div class="sym">“watching your granddaughter walk down the aisle through a smear — missing the faces and milestones you've waited your whole life for.”</div></div>
+      <div class="test-row"><div class="cond">The slow surrender of self</div><div class="sym">“the day the keys get taken, the day you can't manage your own pills — the burden you swore you'd never be.”</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- RHYTHM -->
+<section id="rhythm">
+  <div class="wrap reveal">
+    <span class="sec-tag">08 — Operating Cadence</span>
+    <h2>Your daily &amp; weekly rhythm</h2>
+    <div class="rhythm grid g2">
+      <div class="card"><h3><span class="chip">⏰</span>Time Doctor</h3><p>Always <strong>clock in</strong> when you start and <strong>clock out</strong> when you finish. Simple and consistent, every day.</p></div>
+      <div class="card"><h3><span class="chip">💬</span>Slack reports — 2× daily</h3><p><span class="time-tag">START OF DAY</span> what you're tackling today.<br><span class="time-tag">END OF DAY</span> what you got done. Post both, every day.</p></div>
+      <div class="card"><h3><span class="chip">📅</span>Team meetings</h3><p>Attend the team meeting — weekly, sometimes every two weeks. Come prepared with your numbers and learnings.</p></div>
+      <div class="card"><h3><span class="chip">📚</span>Work the SOPs</h3><p>Follow the SOPs and Loom walkthroughs closely. They keep the whole system tight and repeatable. Questions? Message the founder anytime.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section id="tools">
+  <div class="wrap reveal">
+    <span class="sec-tag">09 — Your Stack</span>
+    <h2>Tools &amp; access</h2>
+    <p class="lead">Make sure you have access to all of these in your first days.</p>
+    <div class="grid g2" style="margin-top:24px">
+      <div class="tool"><div class="ic">📊</div><div><h4>Creative Master Sheet</h4><p>Source of truth — winners, breakdowns &amp; briefs (internal only)</p></div></div>
+      <div class="tool"><div class="ic">🗂️</div><div><h4>Notion</h4><p>Concept cards &amp; editor tasks, with naming conventions</p></div></div>
+      <div class="tool"><div class="ic">⏰</div><div><h4>Time Doctor</h4><p>Clock in / clock out every day</p></div></div>
+      <div class="tool"><div class="ic">🔎</div><div><h4>AdSpy / Ad Library / Kalodata</h4><p>Find &amp; model winning competitor ads</p></div></div>
+      <div class="tool"><div class="ic">📉</div><div><h4>Adnova Creative Analytics</h4><p>Creative-level performance data for your learnings</p></div></div>
+      <div class="tool"><div class="ic">📈</div><div><h4>Meta Ads Manager</h4><p>Read test data, hook/hold rate, ROAS &amp; learnings</p></div></div>
+      <div class="tool"><div class="ic">💬</div><div><h4>Slack</h4><p>Daily BOD / EOD reports &amp; comms</p></div></div>
+      <div class="tool"><div class="ic">👽</div><div><h4>Reddit</h4><p>Voice-of-customer research on each angle</p></div></div>
+      <div class="tool"><div class="ic">👥</div><div><h4>Facebook Groups</h4><p>Research the communities for our angles</p></div></div>
+      <div class="tool"><div class="ic">🛒</div><div><h4>Amazon Reviews</h4><p>Voice-of-customer research goldmine</p></div></div>
+      <div class="tool"><div class="ic">🤖</div><div><h4>Claude</h4><p>Research, organizing, pressure-testing copy</p></div></div>
+      <div class="tool"><div class="ic">🎬</div><div><h4>Loom</h4><p>Walkthroughs for the sheet &amp; SOPs</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WEEK 1 CHECKLIST -->
+<section id="start">
+  <div class="wrap reveal">
+    <span class="sec-tag">10 — Getting Started</span>
+    <h2>Your first week checklist</h2>
+    <p class="lead">Tap each item as you complete it. Get set up, learn the system, and ship your first researched batch.</p>
+    <div class="check-wrap">
+      <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--muted);font-weight:600">
+        <span>Progress</span><span id="pct">0%</span>
+      </div>
+      <div class="progress"><div class="progress-bar" id="bar"></div></div>
+      <div id="checklist"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="logo">N</div>
+    <p><strong>Neurobella</strong> — Creative Strategy Onboarding</p>
+    <p style="margin-top:6px">Study the winners. Start at Level 2. Test, learn, scale. 🚀</p>
+  </div>
+</footer>
+
+<script>
+  const items = [
+    ["Get access to all tools","Master Sheet, Notion, Time Doctor, AdSpy/Kalodata, Adnova, Meta, Slack, Loom"],
+    ["Watch the Loom walkthroughs","Learn the Master Sheet, Notion board & the SOPs"],
+    ["Study the Legend tab","Concept levels, creative formats & iteration codes"],
+    ["Study every winning ad","Read the full breakdowns in the Master Sheet"],
+    ["Internalize the levels","Start at Level 2 → 3, 4, 5 from learnings (skip Level 1)"],
+    ["Learn BOTH locked briefs","Macular Degeneration + Diabetic Retinopathy moving parts"],
+    ["Pick your first avatar & angle","Confirm the moving parts you'll work with"],
+    ["Do deep research","Amazon + Reddit + Facebook groups + Claude"],
+    ["Send research for approval","⛔ Wait for sign-off before briefing"],
+    ["Set up Time Doctor & first Slack reports","Build the clock-in + BOD/EOD habit"],
+    ["Write & log your first Level 2 briefs","Per angle: 10 native ads + 5 videos — tag format & level"],
+    ["Create Notion cards with naming convention","Batch · Concept · Angle · Awareness · Format · Goal"],
+    ["Know where to pull your data","Media buyer · Adnova creative analytics · Ads Manager"]
+  ];
+  const list = document.getElementById('checklist');
+  let done = new Set();
+  function render(){
+    list.innerHTML='';
+    items.forEach((it,i)=>{
+      const row=document.createElement('div');
+      row.className='check-item'+(done.has(i)?' done':'');
+      row.innerHTML=`<div class="box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#06160f" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="txt">${it[0]}<small>${it[1]}</small></div>`;
+      row.onclick=()=>{done.has(i)?done.delete(i):done.add(i);render();};
+      list.appendChild(row);
+    });
+    const pct=Math.round(done.size/items.length*100);
+    document.getElementById('bar').style.width=pct+'%';
+    document.getElementById('pct').textContent=pct+'%';
+  }
+  render();
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0,rootMargin:"0px 0px -60px 0px"});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
